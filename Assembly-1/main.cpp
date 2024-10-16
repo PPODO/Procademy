@@ -10,12 +10,27 @@ void Test() {
 	c = a + b;
 }
 
+struct TEST {
+	char m_c;
+	int m_i;
+
+public:
+	TEST(char c, int i) : m_c(c), m_i(i) {
+
+	}
+
+};
+
 int main() {
-	Test();
+	//Test();
+
+	int cA = 1000;
+	int iB = 1000;
+
+	printf("%c, %d", cA, iB);
 
 	return 0;
 }
-
 /*
 	어셈블리를 통해 릴리즈 모드에서의 디버깅이 가능.
 	메모리 뷰를 통해 ebp, esp와 스택 프레임 내의 변수 값 변동 확인이 가능하며
