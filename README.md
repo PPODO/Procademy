@@ -4,7 +4,7 @@
    - [1. 레지스터](https://github.com/PPODO/Procademy?tab=readme-ov-file#1-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%EB%A0%88%EC%A7%80%EC%8A%A4%ED%84%B0)
    - [2. 릴리즈와 디버그 모드](https://github.com/PPODO/Procademy?tab=readme-ov-file#2-%EB%A6%B4%EB%A6%AC%EC%A6%88%EC%99%80-%EB%94%94%EB%B2%84%EA%B7%B8-%EB%AA%A8%EB%93%9C)
    - [3. 명령어 체계](https://github.com/PPODO/Procademy?tab=readme-ov-file#3-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%B2%B4%EA%B3%84)
-   - [4. 64비트 데이터 모델](https://github.com/PPODO/Procademy?tab=readme-ov-file#4-64%EB%B9%84%ED%8A%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%AA%A8%EB%8D%B8))
+   - [4. 64비트 데이터 모델](https://github.com/PPODO/Procademy?tab=readme-ov-file#4-64%EB%B9%84%ED%8A%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%AA%A8%EB%8D%B8)
    - [5. C 기억 클래스 및 속성 수식자](https://github.com/PPODO/Procademy?tab=readme-ov-file#5-c-%EA%B8%B0%EC%96%B5-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%B0%8F-%EC%86%8D%EC%84%B1-%EC%88%98%EC%8B%9D%EC%9E%90)
    - [6. 컴퓨터의 음수 표현](https://github.com/PPODO/Procademy?tab=readme-ov-file#6-%EC%BB%B4%ED%93%A8%ED%84%B0%EC%9D%98-%EC%9D%8C%EC%88%98-%ED%91%9C%ED%98%84)
    - [7. sizeof 연산자](https://github.com/PPODO/Procademy?tab=readme-ov-file#7-sizeof-%EC%97%B0%EC%82%B0%EC%9E%90)
