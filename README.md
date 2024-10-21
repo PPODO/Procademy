@@ -15,8 +15,8 @@
    - [12. Switch-case 문의 비밀](https://github.com/PPODO/Procademy?tab=readme-ov-file#12-switch-case-%EB%AC%B8%EC%9D%98-%EB%B9%84%EB%B0%80)
    - [13. 무한 반복문](https://github.com/PPODO/Procademy?tab=readme-ov-file#13-%EB%AC%B4%ED%95%9C-%EB%B0%98%EB%B3%B5%EB%AC%B8)
    - [14. do-while문의 사용처](https://github.com/PPODO/Procademy?tab=readme-ov-file#14-do-while%EB%AC%B8%EC%9D%98-%EC%82%AC%EC%9A%A9%EC%B2%98)
-   - [15. 함수 호출 시, 어셈블리 분석]()
-   - [16. rand 함수 분석]()
+   - [15. 함수 호출 시, 어셈블리 분석](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#15-%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C-%EC%8B%9C-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%EB%B6%84%EC%84%9D)
+   - [16. rand 함수 분석](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#16-rand-%ED%95%A8%EC%88%98-%EB%B6%84%EC%84%9D)
 
 
 
