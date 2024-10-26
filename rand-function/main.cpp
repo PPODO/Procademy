@@ -34,6 +34,6 @@ int main() {
 
 	std::cout << "CRT Rand : " << rand() << std::endl;
 	std::cout << "My Rand : " << my_rand() << std::endl;
-
+	
 	return 0;
 }
