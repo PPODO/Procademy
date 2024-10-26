@@ -15,6 +15,8 @@
    - [12. Switch-case 문의 비밀](https://github.com/PPODO/Procademy?tab=readme-ov-file#12-switch-case-%EB%AC%B8%EC%9D%98-%EB%B9%84%EB%B0%80)
    - [13. 무한 반복문](https://github.com/PPODO/Procademy?tab=readme-ov-file#13-%EB%AC%B4%ED%95%9C-%EB%B0%98%EB%B3%B5%EB%AC%B8)
    - [14. do-while문의 사용처](https://github.com/PPODO/Procademy?tab=readme-ov-file#14-do-while%EB%AC%B8%EC%9D%98-%EC%82%AC%EC%9A%A9%EC%B2%98)
+   - [15. 함수 호출 시, 어셈블리 분석](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#15-%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C-%EC%8B%9C-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%EB%B6%84%EC%84%9D)
+   - [16. rand 함수 분석](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#16-rand-%ED%95%A8%EC%88%98-%EB%B6%84%EC%84%9D)
 
 
 
@@ -366,6 +368,172 @@ do-while문은 일반적으로 잘 사용되지 않는다. 하지만 몇몇 상�
 ![image](https://github.com/user-attachments/assets/3e280c29-2ae4-44fe-8b68-e65fbe61f207)
 
 깔끔하다.
+
+# 15. 함수 호출 시, 어셈블리 분석
+**어떠한 매개변수도 받지 않고, 리턴 값이 존재하지 않는 함수를 작성할 시 우리가 분석할 어셈블리는 매우 간단하다.**  
+**그냥 코드 영역의 메모리를 call 하기 때문..**  
+**하지만, 매개변수와 리턴 값이 존재하는 함수의 어셈블리는 어떠할까?**
+
+![image](https://github.com/user-attachments/assets/d383c92a-8fec-4e15-b4d6-6d9bf89fad71)
+
+간단하게 매개변수로 들어오는 값을 바로 리턴해주는 함수를 작성해보았다. 그럼 해당 코드의 어셈블리를 보자.
+
+![image](https://github.com/user-attachments/assets/cba89bf4-2d0c-4d6e-ba72-cb2c1371cbba)
+
+함수를 호출하기전, **스택에 어떤 값을 push** 하고, **함수 호출 이후 esp에 4를 더해주는 코드**가 추가되었다.  
+이들은 무엇일까?
+
+**함수 호출 시, 어셈블리에선 함수의 매개변수를 call 이전에 스택에 밀어 넣는다.**  
+그리고 함수 호출 이후, **esp에 4를 더해주는 명렁어는 이 push한 매개변수를 해제**하기 위한 코드이다.  
+여기까진 쉽다.  
+
+그러면 **함수의 리턴 값**은 어떻게 될까?
+
+![image](https://github.com/user-attachments/assets/2ff59ce1-bd2d-4d4d-b002-33a1aac650e2)
+
+**리턴 값을 eax 레지스터에 넣는 모습을 볼 수 있다.**  
+**이는 호출 규약으로, 모든 함수의 리턴 값은 eax 레지스터에 넣어야만 한다.**  
+
+그렇기에 코드를 아래와 같이 수정해보고 어셈블리를 다시 관찰해보면 
+
+![image](https://github.com/user-attachments/assets/39ff1249-43c2-4cce-b67e-52ce71e3f07c)
+
+![image](https://github.com/user-attachments/assets/bcaae58f-eb63-4bf4-adb4-1e1cf06d6f70)
+
+**eax 레지스터에서 바로 변수 a에 값을 대입**하는 걸 볼 수 있다. 왜?  
+**모든 함수의 리턴 값을 eax 레지스터에 넣어야 하기 때문.**
+
+# 16. rand 함수 분석
+**게임을 개발할 때 난수를 사용할 때가 분명히 존재한다.**  
+그럴 때 사용할 수 있는 함수는 **C에서 기본적으로 제공해주는 rand 함수**나 **C++ STL에 포함되어 있는 새로운 방식을 사용해야 하는데,**  
+이번엔 **C언어의 rand, srand 함수를 어셈블리어를 통해 분석해보는 시간**을 가져보자.
+
+
+**기본적으로 C에서 제공해주는 rand 함수는 난수의 분표가 일정하지 않다.**  
+**signed short. 0 ~ 32767 사이의 값을 임의**로 뽑는데, 이걸 백분율을 통해 **0 ~ 99**의 값을 뽑아내보자 한다면, **rand의 값 분포 중 마지막 두 수가 67로 끝나기 때문**에  
+**0 ~ 67의 값이 68 ~ 99까지의 값보다 한 번 더 나올 가능성이 존재**하기 때문이다.  
+하지만 그리 큰 의미가 있지 않기 때문에 보통 rand함수를 자주 쓰긴 하는데, 그냥 그렇다구요..  
+
+또한 **rand 함수를 사용하기 위한 전제 조건**으로 **srand 함수를 통한 seed의 초기화**인데, 해당 이유는 **어셈블리를 통해 직접 확인**해 볼 수 있다.
+
+![image](https://github.com/user-attachments/assets/3fac8f12-8f8d-4097-ad8d-96a615b759f8)
+
+상당히 복잡해 보인다.. 하지만 겁먹지 말고 한 줄씩 분석해보자.
+
+![image](https://github.com/user-attachments/assets/c9a3d9ba-32c3-4849-a702-18e65e26ff48)
+
+**위의 두 줄은 새로운 함수가 호출되었으니, esp와 ebp의 위치를 스택 프레임에 맞추는 과정이다.**  
+**나머지 명령어는 크게 신경 쓸 필요가 없다. 옛 관행을 지키기 위해 추가된 명령어들이다.(백업을 위해)**
+
+![image](https://github.com/user-attachments/assets/b60f338c-c736-4ef7-93bd-cf51931ad5b1)
+
+**처음 두 명령어는 크게 신경 쓸 필요 없다. 컴파일러에 따라 달라질 수 있는 명령어다.  
+사실 아래에 있는 대부분의 명령어가 그렇지만, 우리의 컴파일러에선 이렇게 나왔으니 하나씩 분석하는 것이다.**
+
+![image](https://github.com/user-attachments/assets/8e27f814-987e-4095-a132-c62863460f54)
+
+**주목할 건 FlsGetValue 함수 호출이다.  
+해당 함수에 대한 자세한 설명은 찾아볼 수 없지만, 기본적으로 srand는 스레드 단위로 초기화를 해줘야 한다.  
+즉 srand의 시드 값은 스레드별로 존재한다는 것.  
+또한 srand의 시드 값은 ptd라는 구조체 내부에 저장을 하는데, 저 함수가 해당 구조체에서 값을 가져오는 것과 비슷한 역할을 하지 않을까 생각 중이다.**
+
+다시 한 줄씩 분석해보면,  
+**ecx 레지스터에 0x00760942E4 주소에 있는 값을 가져오고, 
+ebx를 xor 연산하고, ebp - 4 위치에 존재하는 메모리 공간에 eax 레지스터의 값을 복사하고 있다.  
+여기서 ebx에는 쓰레기 값이 들어가 있을 것이고, eax 레지스터에는 이전 함수의 리턴 값이 존재할 것이다.**
+
+**그리고 ecx 레지스터를 0FFFFFFFF 와 비교한 뒤, 두 값이 같다면 특정 코드 영역으로 점프하도록 설계되어 있다.  
+아마 정상적인 값을 가져오지 못 했을 경우 해당 코드 영역으로 점프할 것이다.** 
+
+그러면 다음 코드를 살펴보자.  
+
+![image](https://github.com/user-attachments/assets/f24aff24-4d83-4723-9338-cfd33e780e8d)
+
+**다시 FlsGetValue 함수를 호출한다.
+eax 레지스터의 값을 edi로 옮겨준다.(이전 함수의 리턴 값)  
+그리고 두 값을 test연산 해준다.  
+여기서 값은 레지스터를 test 연산 해준다는 것은 해당 레지스터가 0인지 아닌지 판별하겠다는 뜻이다.  
+즉, edi 값이 0이라면 특정 코드 영역으로 점프하겠다는 뜻이다.  
+이 또한 정상적이 값을 가져오지 못 했을 경우 동작하는 로직이므로 넘기도록하자.**
+
+![image](https://github.com/user-attachments/assets/027de65f-b892-4357-b6ef-ffea292e6370)
+
+**edi 레지스터와 0FFFFFFFF와 비교한 뒤, 두 값이 같다면 특정 코드 영역 데이터로 이동한다.  
+이또한 위의 정상적이지 못한 로직일 경우 작동하는 것이다.  
+그리고 바로 다음 줄은 그냥 jmp 명령어가 왔다.
+모든 값이 정상적인 것으로 판단되었다는 뜻이다. 해당 코드 영역 데이터엔 srand를 위한 작업이 이루어지는 내용이 존재한다.**
+
+그럼 해당 영역을 살펴보자.
+
+![image](https://github.com/user-attachments/assets/346912b5-0356-4422-a15c-e6f9a5a5790f)
+
+**우선 ebp-4에 존재하는 값과 10진수 868을 곱해준 뒤, ebx 레지스터에 넣는다.  
+다음으로 ebx 레지스터와 edi 레지스터를 더해준다.  
+그리고 또, ebx 레지스터가 0인지 판별(test 명령어)하고, 맞다면 75FD0E83 코드 영역으로 이동한다.  
+아니라면, ebp+8에서 eax 레지스터로 값을 가져온 뒤, ebx+24위치에 해당 값을 복사한다.**
+
+우선 여기서 75FD0E83 코드 영역은
+
+![image](https://github.com/user-attachments/assets/085bd7f6-6a53-4949-b64a-b69561774561)
+
+abort 함수 호출 부분이다.
+
+![image](https://github.com/user-attachments/assets/1f1cb2e1-56c2-4c3f-b30a-a1225d1982cd)
+
+그리고 ebp+8위치에 존재하는 값을 메모리 뷰에서 한 번 관찰해보자.
+
+![image](https://github.com/user-attachments/assets/f6b8c785-2c0c-43d5-83d9-3f67548ad565)
+
+**16진수로 a, 10진수로는 10의 값이다. 이는 우리가 함수의 매개변수로 넘겨준 값이다.**  
+**즉 함수는 매개변수 사용시, ebp + n을 통해 특정 매개변수에 접근한다.  
+그러는 이유는 함수 호출 이전에 스택에 매개변수를 넣기 때문이다.**
+
+**그러면 ebx+24에 이 값을 대입하는 이유는 무엇일까?  
+이는 초반에 얘기했던 srand 시드값이 저장되는 위치이기 때문이다.  
+위에서 ebx에 이상한 연산들을 했던 이유는 해당 메모리 공간에 접근하기 위해.. 어렵고 복잡하게 계산한 것이다..**  
+
+**이렇게 seed 값이 저장되기 때문에, rand함수는 연속적이며, 어셈블리를 통해 다음 값을 예측할 수 있게 된다.  
+그렇기 때문에 crt에서 제공해는 rand 함수는 암호화 되어 있지 않다고 말할 수 있다.**
+
+
+그럼 rand 함수를 살펴보자. 이번엔 불필요한 코드는 넘기도록 하겠다.
+
+![image](https://github.com/user-attachments/assets/4f2c597b-235c-4a24-9ca6-aa51d29d2047)
+
+
+**ebx+24위치에 있는 값을 0x343FD와 곱한 뒤, eax 레지스터에 넣는다.  
+여기서 ebx+24는 위에서 본 것과 같이 ptd 구조체 내부에 있는 seed 값이다.**  
+한 번 메모리 뷰로 살펴보자.
+
+![image](https://github.com/user-attachments/assets/115f3bf7-1034-42e2-9d03-65f173c52102)
+
+**진짜 10이라는 값이 들어있다.**
+
+
+**그리고 0x269EC3란 값을 eax에 더해준다.  
+그럼 어마무시하게 큰 값이 나오게 되는데 우리의 rand 함수는 signed short 최대 크기 범위의 값의 범위를 가지기에  
+해당 크기만큼 짤라줘야할 필요가 있다. 그럼 해당하는 코드를 보자.**  
+
+![image](https://github.com/user-attachments/assets/f3fee8e9-1c31-48d9-8f81-76136f9ea4a9)
+
+**계산된 eax 값을 다시 ptd 구조체 내부에 저장하고, 16비트만큼 오른쪽으로 쉬프트 연산을 해주는 것을 볼 수 있다.  
+다음으로 0x7FFF만큼 and 연산을 해주는데, 이는 signed short의 최대값이다.  
+그렇기에 해당 범위 내의 값이 나오게 되는 것이다.**
+
+해당 함수는 이것으로 끝이다.  
+**리턴은 어떻게 하냐고?**  
+**함수 호출 규약으로 모든 리턴 값을 eax에 넣는다는 걸 잊지 말도록 하자.  
+이미 모든 연산을 eax 레지스터에서 했기 때문에 따로 코드를 추가할 필요가 없는 것이다.**
+
+
+자, 이제 분석이 끝났으니 이 srand와 rand 함수를 우리가 직접 구현해보면 어떨까?  
+코드는 아래와 같다.
+
+![image](https://github.com/user-attachments/assets/47917e0a-62b3-4cc6-9373-8ef55d4f9a2e)
+
+![image](https://github.com/user-attachments/assets/24569fde-3147-424a-8b92-dd2aa2e2283e)
+
+결과 또한 같다.
 
 
 
