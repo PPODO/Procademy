@@ -17,7 +17,7 @@
    - [14. do-while문의 사용처](https://github.com/PPODO/Procademy?tab=readme-ov-file#14-do-while%EB%AC%B8%EC%9D%98-%EC%82%AC%EC%9A%A9%EC%B2%98)
    - [15. 함수 호출 시, 어셈블리 분석](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#15-%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C-%EC%8B%9C-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%EB%B6%84%EC%84%9D)
    - [16. rand 함수 분석](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#16-rand-%ED%95%A8%EC%88%98-%EB%B6%84%EC%84%9D)
-   - [17. 스택 프레임이 망가졌을 때의 분석 및 예방(EBP)](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#17-%EC%8A%A4%ED%83%9D-%ED%94%84%EB%A0%88%EC%9E%84%EC%9D%B4-%EB%A7%9D%EA%B0%80%EC%A1%8C%EC%9D%84-%EB%95%8C%EC%9D%98-%EB%B6%84%EC%84%9D-%EB%B0%8F-%EC%98%88%EB%B0%A9ebp)
+   - [17. 스택 프레임 및 EIP가 망가졌을 때의 분석 및 예방](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#17-%EC%8A%A4%ED%83%9D-%ED%94%84%EB%A0%88%EC%9E%84%EC%9D%B4-%EB%A7%9D%EA%B0%80%EC%A1%8C%EC%9D%84-%EB%95%8C%EC%9D%98-%EB%B6%84%EC%84%9D-%EB%B0%8F-%EC%98%88%EB%B0%A9ebp)
 
 
 
@@ -537,7 +537,7 @@ abort 함수 호출 부분이다.
 결과 또한 같다.
 
 
-# 17. 스택 프레임이 망가졌을 때의 분석 및 예방(EBP)
+# 17. 스택 프레임 및 EIP가 망가졌을 때의 분석 및 예방
 **스택 프레임중에서 Old EBP가 망가졌을 때 발생하는 문제와 추적, 예방 방법**을 알아보도록 하자.  
 일반적으로 **스택 프레임**의 **Old EBP 영역에 접근하여 임의의 값으로 변경**하고, 
 함수가 종료된다면, **EBP 레지스터는 잘못된 old ebp 값을 읽어오기에 스택 프레임. 즉 스택이 망가질 수 있게 된다.**  
