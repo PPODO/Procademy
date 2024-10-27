@@ -17,8 +17,8 @@
    - [14. do-while문의 사용처](https://github.com/PPODO/Procademy?tab=readme-ov-file#14-do-while%EB%AC%B8%EC%9D%98-%EC%82%AC%EC%9A%A9%EC%B2%98)
    - [15. 함수 호출 시, 어셈블리 분석](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#15-%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C-%EC%8B%9C-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%EB%B6%84%EC%84%9D)
    - [16. rand 함수 분석](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#16-rand-%ED%95%A8%EC%88%98-%EB%B6%84%EC%84%9D)
-   - [17. 함수 호출 규약]
-   - [18. 스택 프레임 및 EIP가 망가졌을 때의 분석 및 예방](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#17-%EC%8A%A4%ED%83%9D-%ED%94%84%EB%A0%88%EC%9E%84-%EB%B0%8F-eip%EA%B0%80-%EB%A7%9D%EA%B0%80%EC%A1%8C%EC%9D%84-%EB%95%8C%EC%9D%98-%EB%B6%84%EC%84%9D-%EB%B0%8F-%EC%98%88%EB%B0%A9)
+   - [17. 함수 호출 규약](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#17-%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C-%EA%B7%9C%EC%95%BD)
+   - [18. 스택 프레임 및 EIP가 망가졌을 때의 분석 및 예방](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#18-%EC%8A%A4%ED%83%9D-%ED%94%84%EB%A0%88%EC%9E%84-%EB%B0%8F-eip%EA%B0%80-%EB%A7%9D%EA%B0%80%EC%A1%8C%EC%9D%84-%EB%95%8C%EC%9D%98-%EB%B6%84%EC%84%9D-%EB%B0%8F-%EC%98%88%EB%B0%A9)
 
 
 
