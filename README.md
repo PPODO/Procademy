@@ -22,7 +22,9 @@
    - [19. 구조체를 함수의 매개변수로 넣을 경우 벌어지는 일](https://github.com/PPODO/Procademy?tab=readme-ov-file#19-%EA%B5%AC%EC%A1%B0%EC%B2%B4%EB%A5%BC-%ED%95%A8%EC%88%98%EC%9D%98-%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98%EB%A1%9C-%EB%84%A3%EC%9D%84-%EA%B2%BD%EC%9A%B0-%EB%B2%8C%EC%96%B4%EC%A7%80%EB%8A%94-%EC%9D%BC)
    - [20. 구조체를 함수의 리턴으로 넣을 경우 벌어지는 일](https://github.com/PPODO/Procademy?tab=readme-ov-file#20-%EA%B5%AC%EC%A1%B0%EC%B2%B4%EB%A5%BC-%ED%95%A8%EC%88%98%EC%9D%98-%EB%A6%AC%ED%84%B4%EC%9C%BC%EB%A1%9C-%EB%84%A3%EC%9D%84-%EA%B2%BD%EC%9A%B0-%EB%B2%8C%EC%96%B4%EC%A7%80%EB%8A%94-%EC%9D%BC)
    - [21. 함수내 지역 정적 변수의 비밀](https://github.com/PPODO/Procademy?tab=readme-ov-file#21-%ED%95%A8%EC%88%98%EB%82%B4-%EC%A7%80%EC%97%AD-%EC%A0%95%EC%A0%81-%EB%B3%80%EC%88%98%EC%9D%98-%EB%B9%84%EB%B0%80)
-
+   - [22. 문자열 배열 리터럴 const 문자열 속도 차이]
+   - [23. 구조체 포인터]
+   - [24. 구조체 패딩 변수 패딩]
 
 
 ---
@@ -917,6 +919,120 @@ destination은 [ebp - 140]위치이다. 해당 위치는 stDATA 구조체의 메
 **성능은 상수일 경우보다 현저히 떨어지게 될 것이다.**   
 
 **최고의 방법은 지역 정적 변수를 사용하지 않는 것이다..** 
+
+# 22. 문자열 배열 리터럴 const 문자열 속도 차이
+
+![image](https://github.com/user-attachments/assets/05bf2761-b38c-4a82-8d3b-99d66e036744)
+
+위의 코드를 보았을 때의 성능차이는 어떨 것 같은가?  
+
+**정답은 buffer2의 코드 부분이 더 빠르다는 것이다. 그에 대한 이유는 다음과 같다.**
+
+![image](https://github.com/user-attachments/assets/29d02f1e-d7ab-4d79-9c85-ccfb706e3bf7)
+
+두 대입문에 대한 어셈블리 코드이다.
+
+**두 문자열 모두 리터럴 영역에 존재하는 것은 맞다.**
+
+![image](https://github.com/user-attachments/assets/042a7b4a-56b0-44bf-aa9e-a8f82863f89e)
+
+**하지만 대입되는 변수가 const이냐 아니냐 여부에 따라 처리되는 작업이 다를 뿐인 것이다.**  
+**buffer1은 일반 배열이기 때문에 해당 리터럴 문자열 위치에서 읽어온 문자를 문자열 배열에 복사할 필요가 있다.**  
+**하지만 buffer2는 char 타입 포인터이기 때문에 단지 해당 리터럴 문자열의 위치만을 가르키면 되기에 더 적은 작업을 하게 된다.**
+
+
+# 23. 구조체 포인터
+**구조체를 포인터로 사용할 때는 처음으로 선언된 메모리의 주소를 기반으로 나머지 멤버 변수들의 연산을 한다.
+그렇기에 첫 번째, 두번 째 이후 멤버에 접근할 때에는 명령어의 바이트 수가 하나 더 추가가 된다.**
+
+그렇기 때문에 **자주 사용되는 멤버 변수는 첫 번째. 가장 맨 위에 올려져야 한다.**
+
+![image](https://github.com/user-attachments/assets/4cf84a4e-18c0-4b82-a52c-f7fc3fe741f5)
+
+
+![image](https://github.com/user-attachments/assets/99de2af3-9672-46aa-b8d7-c687c760f391)
+
+보면 멤버변수 a에 접근할 때와 b, c, d에 접근할 때의 명령어 바이트 수가 다른 걸 확인할 수 있다.
+
+
+# 24. 구조체 패딩 변수 패딩
+**일반적으로 구조체에서 패딩을 언급할 때 가장 대표적으로 나오는 얘기는 아래와 같다.  
+"구조체의 가장 큰 멤버변수를 기준으로 나머지 멤버 변수들의 패딩 값이 정해진다."**
+
+즉 stDATA 라는 구조체 안에 int형 변수와 char형 변수, short 형 변수 세 개가 존재할 때,  
+가장 큰 변수는 int 형이므로, int 4바이트 char형 1바이트와 나머지 3바이트 패딩. short 형 2바이트와 나머지 패딩이 들어간다.  
+라는 것이다.
+
+하지만 이는 반은 맞고 반은 틀린 얘기이다.
+
+우선 패딩에 대해 얘기해보고자한다.
+**패딩이라는 개념은 구조체 뿐만 아니라 모든 일반 변수에도 적용되는 개념이다.**  
+하지만 구조체에서 해당 내용이 언급되는 이유는 
+가시적으로 가장 눈에 잘 띄는 부분이기 때문..
+
+**일단 패딩 얘기를 하기 이전, 구조체에서 각 변수의 메모리 위치는  
+해당 메모리의 사이즈의 배수에 맞는 위치에 있이야한다.**  
+**즉 2바이트 변수는 2, 4, 6과 같은 위치에서 시작해야하고,**  
+**4바이트 변수는 4, 8, c 위치에서  
+8바이트는 8, 16에서 시작해야한다.**
+**현 cpu에서는 문제가 되지 않지만, 상당히 오래된 cpu에서는 이렇게 각 변수의  
+경계에 맞지 않는 위치에 있으면 값이 원자적으로 변경되지 않는다는 문제가 있었다.**  
+
+**현재에 이르러선 메모리를 읽어오는 과정에 캐시 라인이라는 개념이 추가되어  
+그리 큰 문제는 되지 않지만, 그래도 캐시라인의 크기가 64바이트이기 때문에  
+캐시라인을 경계로 변수가 걸치게 되면 값이 원자적으로 변경되지 않는다.**
+
+자. 다시 본래 얘기로 돌아와서.  
+결과적으로 캐시 라인이라는 개념이 추가되었기에 구조체의 멤버변수는 해당 변수 크기의 경계에 저장될 필요는 없다.  
+하지만 cpu가 최상의 속도를 내기 위해선 그럴 필요가 있다.
+
+![image](https://github.com/user-attachments/assets/bbf73adf-d0b4-4cf1-81fc-16259783ccd4)
+
+![image](https://github.com/user-attachments/assets/9c565975-b9b0-4b4a-bc18-0ab439f633eb)
+
+
+아래 구조체의 메모리 뷰를 한 번 보도록 하자.
+
+![image](https://github.com/user-attachments/assets/ab7f7b73-ba2a-46f3-8e96-802692c9cd9d)
+
+**int 변수는 4위치에서 시작하고,  
+char 변수는 8위치에서.  
+short 변수는 2의 배수 위치에 존재해야하기에 8다음 9위치가 아닌, 10위치. 즉 a 위치에서부터 값이 쓰이게 된다.**  
+
+**그렇기 때문에 char 변수와 short 변수 사이에 알 수 없는 값. 즉 패딩값이 들어가게 된 것이다.**
+
+그럼 아래의 구조체의 크기는 몇 일까?
+
+![image](https://github.com/user-attachments/assets/606d5220-be75-4031-b620-7f8bf4784beb)
+
+구조체의 크기를 알기 위해선, 해당 구조체에서 가장 큰 사이즈의 멤버 변수를 알고 있어야 한다.
+가장 큰 멤버 변수에 따라 패딩 사이즈가 정해지기 때문..
+
+![image](https://github.com/user-attachments/assets/43f2aa2f-022c-4d1f-8c06-fbdd27f02a00)
+
+해당 구조체에선 가장 큰 변수의 사이즈가 2바이트이기 때문에 구조체의 총 크기는 10바이트가 된다.
+
+![image](https://github.com/user-attachments/assets/3fe9afb4-78e8-42bd-9b7c-2c486986fdf6)
+
+하지만 여기서 short 형 변수 두개를 int로 바꾸면 어떻게 될까?
+
+![image](https://github.com/user-attachments/assets/6eca2a71-f297-4bd9-8465-51ba2bd04d46)
+
+![image](https://github.com/user-attachments/assets/2cfbedb9-c3eb-469a-9a77-403e463df39d)
+
+가장 큰 사이즈가 4바이트이기 때문에 12바이트가 나오게 된다.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
