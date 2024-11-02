@@ -3,6 +3,34 @@
 
 #define W_SCREEN_SIZE 15
 #define H_SCREEN_SIZE 10
+#define MAX_STACK_SIZE 5000
+#define MAX_DIRECTION 4
+
+struct COORDINATE {
+	int X;
+	int Y;
+};
+
+COORDINATE g_Stack[MAX_STACK_SIZE];
+int g_StackTopIndex = 0;
+
+bool Push(const COORDINATE& COORDINATE) {
+	if (g_StackTopIndex >= MAX_STACK_SIZE)
+		return false;
+
+	g_Stack[g_StackTopIndex++] = COORDINATE;
+
+	return true;
+}
+
+bool Pop(COORDINATE& outData) {
+	if (g_StackTopIndex - 1 < 0)
+		return false;
+
+	outData = g_Stack[--g_StackTopIndex];
+
+	return true;
+}
 
 char g_OriginalMap[H_SCREEN_SIZE][W_SCREEN_SIZE] =
 {
@@ -22,6 +50,9 @@ char g_Map[H_SCREEN_SIZE][W_SCREEN_SIZE];
 
 void Init() {
 	memcpy(g_Map, g_OriginalMap, H_SCREEN_SIZE * W_SCREEN_SIZE);
+	g_StackTopIndex = 0;
+
+	Push(COORDINATE{ 7, 5 });
 }
 
 void ScreenPrint() {
@@ -36,16 +67,43 @@ void ScreenPrint() {
 	}
 }
 
-void Paint(const int x, const int y, const int iDepth) {
-	if (x < 0 || x >= W_SCREEN_SIZE || y < 0 || y >= H_SCREEN_SIZE || g_Map[y][x] != 'O')
-		return;
+void Paint() {
+	COORDINATE outData;
+	
+	while (g_StackTopIndex >= 1) {
+		--g_StackTopIndex;
+		outData.X = g_Stack[g_StackTopIndex].X;
+		outData.Y = g_Stack[g_StackTopIndex].Y;
 
-	g_Map[y][x] = 'X';
+		if (outData.X >= W_SCREEN_SIZE || outData.Y >= H_SCREEN_SIZE || g_Map[outData.Y][outData.X] != 'O')
+			continue;
 
-	Paint(x + 1, y, iDepth + 1);
-	Paint(x - 1, y, iDepth + 1);
-	Paint(x, y + 1, iDepth + 1);
-	Paint(x, y - 1, iDepth + 1);
+		g_Map[outData.Y][outData.X] = 'X';
+
+		if (g_StackTopIndex < MAX_STACK_SIZE) {
+			g_Stack[g_StackTopIndex].X = outData.X - 1;
+			g_Stack[g_StackTopIndex].Y = outData.Y;
+			++g_StackTopIndex;
+		}
+
+		if (g_StackTopIndex < MAX_STACK_SIZE) {
+			g_Stack[g_StackTopIndex].X = outData.X + 1;
+			g_Stack[g_StackTopIndex].Y = outData.Y;
+			++g_StackTopIndex;
+		}
+
+		if (g_StackTopIndex < MAX_STACK_SIZE) {
+			g_Stack[g_StackTopIndex].X = outData.X;
+			g_Stack[g_StackTopIndex].Y = outData.Y - 1;
+			++g_StackTopIndex;
+		}
+
+		if (g_StackTopIndex < MAX_STACK_SIZE) {
+			g_Stack[g_StackTopIndex].X = outData.X;
+			g_Stack[g_StackTopIndex].Y = outData.Y + 1;
+			++g_StackTopIndex;
+		}
+	}
 }
 
 int main() {
@@ -56,7 +114,7 @@ int main() {
 	clock_t totalTime = 0;
 	for (int i = 0; i < 10000; i++) {
 		clock_t startTime = clock();
-		Paint(7, 5, 0);
+		Paint();
 		totalTime += clock() - startTime;
 
 		Init();
@@ -65,7 +123,6 @@ int main() {
 	ScreenPrint();
 
 	std::cout << totalTime << std::endl;
-
 
 	return 0;
 }
