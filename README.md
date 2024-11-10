@@ -25,8 +25,10 @@
    - [22. 문자열 배열 리터럴 const 문자열 속도 차이](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#22-%EB%AC%B8%EC%9E%90%EC%97%B4-%EB%B0%B0%EC%97%B4-%EB%A6%AC%ED%84%B0%EB%9F%B4-const-%EB%AC%B8%EC%9E%90%EC%97%B4-%EC%86%8D%EB%8F%84-%EC%B0%A8%EC%9D%B4)
    - [23. 구조체 포인터](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#23-%EA%B5%AC%EC%A1%B0%EC%B2%B4-%ED%8F%AC%EC%9D%B8%ED%84%B0)
    - [24. 구조체 패딩 변수 패딩](https://github.com/PPODO/Procademy/tree/master?tab=readme-ov-file#24-%EA%B5%AC%EC%A1%B0%EC%B2%B4-%ED%8C%A8%EB%94%A9-%EB%B3%80%EC%88%98-%ED%8C%A8%EB%94%A9)
-   - [25. 동적할당]
-
+   - [25. 동적할당](https://github.com/PPODO/Procademy/blob/master/README.md#25-%EB%8F%99%EC%A0%81%ED%95%A0%EB%8B%B9)
+   - [26. 메모리 단편화 및 세그먼트](https://github.com/PPODO/Procademy/blob/master/README.md#26-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%8B%A8%ED%8E%B8%ED%99%94-%EB%B0%8F-%EC%84%B8%EA%B7%B8%EB%A8%BC%ED%8A%B8)
+   - [27. 표준 C 문자열 함수](https://github.com/PPODO/Procademy/blob/master/README.md#27-%ED%91%9C%EC%A4%80-c-%EB%AC%B8%EC%9E%90%EC%97%B4-%ED%95%A8%EC%88%98)
+   - [28. 해시](https://github.com/PPODO/Procademy/blob/master/README.md#28-%ED%95%B4%EC%8B%9C)
 
 ---
 # 1. 어셈블리 레지스터
