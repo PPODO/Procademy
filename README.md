@@ -29,8 +29,8 @@
    - [26. 메모리 단편화 및 세그먼트](https://github.com/PPODO/Procademy/blob/master/README.md#26-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%8B%A8%ED%8E%B8%ED%99%94-%EB%B0%8F-%EC%84%B8%EA%B7%B8%EB%A8%BC%ED%8A%B8)
    - [27. 표준 C 문자열 함수](https://github.com/PPODO/Procademy/blob/master/README.md#27-%ED%91%9C%EC%A4%80-c-%EB%AC%B8%EC%9E%90%EC%97%B4-%ED%95%A8%EC%88%98)
    - [28. 해시](https://github.com/PPODO/Procademy/blob/master/README.md#28-%ED%95%B4%EC%8B%9C)
-   - [29. 파일 입출력에서의 텍스트와 바이너리 개념]
-   - [30. DLL]
+   - [29. 파일 입출력에서의 텍스트와 바이너리 개념](https://github.com/PPODO/Procademy/blob/master/README.md#29-%ED%8C%8C%EC%9D%BC-%EC%9E%85%EC%B6%9C%EB%A0%A5%EC%97%90%EC%84%9C%EC%9D%98-%ED%85%8D%EC%8A%A4%ED%8A%B8%EC%99%80-%EB%B0%94%EC%9D%B4%EB%84%88%EB%A6%AC-%EA%B0%9C%EB%85%90)
+   - [30. DLL](https://github.com/PPODO/Procademy/blob/master/README.md#30-dll)
 
 ---
 # 1. 어셈블리 레지스터
