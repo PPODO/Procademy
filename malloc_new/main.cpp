@@ -1,14 +1,11 @@
 #include <iostream>
 
 int main() {
-	char* buffer = (char*)malloc(20);
-	char* buffer2 = (char*)malloc(20);
+	int* p = new int;
+	*p = 5;
+	free(p);
 
-	buffer[21] = '0';
+	printf("%d", *p);
 
-	std::cout << std::endl;
-
-	free(buffer2);
-	free(buffer);
 	return 0;
 }
