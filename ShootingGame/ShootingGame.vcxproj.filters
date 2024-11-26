@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Console">
+      <UniqueIdentifier>{4d538d03-9878-40b9-8ff0-87cd553e5425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actor">
+      <UniqueIdentifier>{bf7cb088-6181-4b6a-81a3-a5ffc112f845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actor\Player">
+      <UniqueIdentifier>{b69e963b-2ff7-4a78-99b7-14be5e9b84b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{b70dddc6-a8fd-4875-8445-8cfdce876aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Title">
+      <UniqueIdentifier>{a234b482-5d40-4890-a43b-bc506dd9c0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Clear">
+      <UniqueIdentifier>{38d0c04c-f2d8-43df-b833-3b6bc13770da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\InGameStage">
+      <UniqueIdentifier>{445bc1f6-d479-4c82-8744-a9c96d26ce5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Loading">
+      <UniqueIdentifier>{afaed830-c874-48d3-9246-96cc3cae3ede}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Console\Console.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Player\Player.h">
+      <Filter>Header Files\Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameManager.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Loading\Loading.h">
+      <Filter>Header Files\Game\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Title\TitleScene.h">
+      <Filter>Header Files\Game\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\InGameStage\InGameStageScene.h">
+      <Filter>Header Files\Game\InGameStage</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Console\Console.cpp">
+      <Filter>Header Files\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Player\Player.cpp">
+      <Filter>Header Files\Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameManager.cpp">
+      <Filter>Header Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Loading\Loading.cpp">
+      <Filter>Header Files\Game\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Title\TitleScene.cpp">
+      <Filter>Header Files\Game\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\InGameStage\InGameStageScene.cpp">
+      <Filter>Header Files\Game\InGameStage</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
