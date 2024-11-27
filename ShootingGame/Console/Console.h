@@ -24,6 +24,6 @@ void Sprite_DrawCharacter(int iX, int iY, char chSprite);
 void Sprite_DrawString(const int iX, const int iY, const char* const strSprite, const ESpriteAligment aligment);
 
 void ChangeMainLoopRunState(const bool bNewState);
-inline bool GetMainLoopRunState();
+bool GetMainLoopRunState();
 
 #endif

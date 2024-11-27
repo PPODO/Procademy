@@ -8,6 +8,7 @@ enum ESceneType {
 };
 
 void InitializeGameManager();
+void ClearGameManager();
 
 void ChangeScene(const ESceneType newSceneType);
 

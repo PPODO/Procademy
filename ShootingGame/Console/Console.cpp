@@ -67,6 +67,6 @@ void ChangeMainLoopRunState(const bool bNewState) {
 	g_bMainLoopRunState = bNewState;
 }
 
-inline bool GetMainLoopRunState() {
+bool GetMainLoopRunState() {
 	return g_bMainLoopRunState;
 }

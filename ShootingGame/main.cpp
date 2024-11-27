@@ -4,7 +4,7 @@
 #include "Console/Console.h"
 #include "Game/GameManager.h"
 
-void main(void) {
+int main(void) {
 	cs_Initial();
 
 	InitializeGameManager();
@@ -18,4 +18,7 @@ void main(void) {
 
 		Sleep(50);
 	}
+
+	ClearGameManager();
+	return 0;
 }

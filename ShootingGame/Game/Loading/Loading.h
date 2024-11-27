@@ -1,3 +1,3 @@
 #pragma once
 
-void InitializeStage();
+void InitializeStage(const char* const sStageFilePath);

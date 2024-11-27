@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{49cb38c5-6386-4862-ac7d-f8ec36441223}</ProjectGuid>
-    <RootNamespace>ShootingGame</RootNamespace>
+    <ProjectGuid>{9fca0455-eb2c-4a02-8aa1-d692dd3038fe}</ProjectGuid>
+    <RootNamespace>FPS</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -128,24 +128,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Actor\Enemy\Enemy.h" />
-    <ClInclude Include="Actor\Player\Player.h" />
-    <ClInclude Include="Console\Console.h" />
-    <ClInclude Include="DataParse\DataParse.h" />
-    <ClInclude Include="Game\GameManager.h" />
-    <ClInclude Include="Game\InGameStage\InGameStageScene.h" />
-    <ClInclude Include="Game\Loading\Loading.h" />
-    <ClInclude Include="Game\Title\TitleScene.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Actor\Enemy\Enemy.cpp" />
-    <ClCompile Include="Actor\Player\Player.cpp" />
-    <ClCompile Include="Console\Console.cpp" />
-    <ClCompile Include="DataParse\DataParse.cpp" />
-    <ClCompile Include="Game\GameManager.cpp" />
-    <ClCompile Include="Game\InGameStage\InGameStageScene.cpp" />
-    <ClCompile Include="Game\Loading\Loading.cpp" />
-    <ClCompile Include="Game\Title\TitleScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

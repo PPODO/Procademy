@@ -1,27 +1,43 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <memory.h>
 #include "Player.h"
 #include "../../Console/Console.h"
+#include "../../DataParse/DataParse.h"
 
-FPlayer g_PlayerInformaiton;
+static FPlayer g_CachedInitPlayerInformation;
+static FPlayer g_CurrentPlayerInformaiton;
 
-void InitializePlayerInformation(){
-	g_PlayerInformaiton.m_iX = 40;
-	g_PlayerInformaiton.m_iY = 12;
+void LoadPlayerInformation(char* const sBuffer) {
+	if (sBuffer) {
+		ReadInt16(sBuffer, "HP", (short*)&g_CachedInitPlayerInformation.m_iHP);
+		ReadInt16(sBuffer, "XPosMoveSpeed", (short*)&g_CachedInitPlayerInformation.m_iXPosMoveSpeed);
+	}
+}
 
-	g_PlayerInformaiton.m_iHP = 100;
+void InitializePlayerInformation() {
+	g_CurrentPlayerInformaiton.m_iX;
+	g_CurrentPlayerInformaiton.m_iY;
+
+	g_CurrentPlayerInformaiton.m_iHP = g_CachedInitPlayerInformation.m_iHP;
+
+	g_CurrentPlayerInformaiton.m_iXPosMoveSpeed = g_CachedInitPlayerInformation.m_iXPosMoveSpeed;
 }
 
 void MoveX(const short iX) {
-	const short iRequestXPos = (short)g_PlayerInformaiton.m_iX + iX;
+	const short iRequestXPos = (short)g_CurrentPlayerInformaiton.m_iX + (iX * g_CurrentPlayerInformaiton.m_iXPosMoveSpeed);
+
 	if (iRequestXPos >= 0 && iRequestXPos < (dfSCREEN_WIDTH - 1))
-		g_PlayerInformaiton.m_iX = iRequestXPos;
+		g_CurrentPlayerInformaiton.m_iX = iRequestXPos;
 }
 
 void MoveY(const short iY) {
-	const short iRequestYPos = (short)g_PlayerInformaiton.m_iY + iY;
-	if (iRequestYPos >= 0 && iRequestYPos < dfSCREEN_HEIGHT)
-		g_PlayerInformaiton.m_iY = iRequestYPos;
+	const short iRequestYPos = (short)g_CurrentPlayerInformaiton.m_iY + iY;
+
+	if (iRequestYPos >= (dfSCREEN_HEIGHT / 2) && iRequestYPos < dfSCREEN_HEIGHT)
+		g_CurrentPlayerInformaiton.m_iY = iRequestYPos;
 }
 
 void PlayerRendering() {
-	Sprite_DrawString(g_PlayerInformaiton.m_iX, g_PlayerInformaiton.m_iY, "-O-", ESpriteAligment::E_Center);
+	Sprite_DrawString(g_CurrentPlayerInformaiton.m_iX, g_CurrentPlayerInformaiton.m_iY, "-<->-", ESpriteAligment::E_Center);
 }

@@ -37,6 +37,12 @@
     <Filter Include="Header Files\Game\Loading">
       <UniqueIdentifier>{afaed830-c874-48d3-9246-96cc3cae3ede}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DataParse">
+      <UniqueIdentifier>{e1052f8b-fc38-43dc-abaa-263bde0e2089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actor\Enemy">
+      <UniqueIdentifier>{50f778b6-63a4-4f40-ac3e-3517f9a9fbc2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Console\Console.h">
@@ -56,6 +62,12 @@
     </ClInclude>
     <ClInclude Include="Game\InGameStage\InGameStageScene.h">
       <Filter>Header Files\Game\InGameStage</Filter>
+    </ClInclude>
+    <ClInclude Include="DataParse\DataParse.h">
+      <Filter>Header Files\DataParse</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Enemy\Enemy.h">
+      <Filter>Header Files\Actor\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="Game\InGameStage\InGameStageScene.cpp">
       <Filter>Header Files\Game\InGameStage</Filter>
+    </ClCompile>
+    <ClCompile Include="DataParse\DataParse.cpp">
+      <Filter>Header Files\DataParse</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Enemy\Enemy.cpp">
+      <Filter>Header Files\Actor\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

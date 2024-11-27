@@ -61,6 +61,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "packing", "packing\packing.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShootingGame", "ShootingGame\ShootingGame.vcxproj", "{49CB38C5-6386-4862-AC7D-F8EC36441223}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FPS", "FPS\FPS.vcxproj", "{9FCA0455-EB2C-4A02-8AA1-D692DD3038FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -301,6 +303,14 @@ Global
 		{49CB38C5-6386-4862-AC7D-F8EC36441223}.Release|x64.Build.0 = Release|x64
 		{49CB38C5-6386-4862-AC7D-F8EC36441223}.Release|x86.ActiveCfg = Release|Win32
 		{49CB38C5-6386-4862-AC7D-F8EC36441223}.Release|x86.Build.0 = Release|Win32
+		{9FCA0455-EB2C-4A02-8AA1-D692DD3038FE}.Debug|x64.ActiveCfg = Debug|x64
+		{9FCA0455-EB2C-4A02-8AA1-D692DD3038FE}.Debug|x64.Build.0 = Debug|x64
+		{9FCA0455-EB2C-4A02-8AA1-D692DD3038FE}.Debug|x86.ActiveCfg = Debug|Win32
+		{9FCA0455-EB2C-4A02-8AA1-D692DD3038FE}.Debug|x86.Build.0 = Debug|Win32
+		{9FCA0455-EB2C-4A02-8AA1-D692DD3038FE}.Release|x64.ActiveCfg = Release|x64
+		{9FCA0455-EB2C-4A02-8AA1-D692DD3038FE}.Release|x64.Build.0 = Release|x64
+		{9FCA0455-EB2C-4A02-8AA1-D692DD3038FE}.Release|x86.ActiveCfg = Release|Win32
+		{9FCA0455-EB2C-4A02-8AA1-D692DD3038FE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
