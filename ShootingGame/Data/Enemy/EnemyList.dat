@@ -1,5 +1,4 @@
 EnemyTypeCount:1
 {
 FilePath:"Data//Enemy//Enemy1.dat"
-PoolCount:50
 }

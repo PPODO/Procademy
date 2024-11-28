@@ -1,5 +1,6 @@
 #include "InGameStageScene.h"
 #include "../../Actor/Player/Player.h"
+#include "../../Actor/Enemy/Enemy.h"
 #include <Windows.h>
 
 void InGamePlayerInput() {
@@ -29,4 +30,5 @@ void InGameStageLogic() {
 
 void InGameStageScene() {
 	PlayerRendering();
+	EnemyRendering();
 }

@@ -14,7 +14,7 @@ static ESceneType g_CurrentSceneType;
 
 static FStageInformation* g_ListOfStageInformation = NULL;
 static unsigned int g_iMaxStageCnt;
-static unsigned int g_iCurrentStageCnt = 0;
+
 
 void LoadStageList(char* const sBuffer) {
 	if (sBuffer) {
@@ -42,7 +42,9 @@ void LoadStageList(char* const sBuffer) {
 void LoadEnemyList(char* const sBuffer) {
 	if (sBuffer) {
 		unsigned short iMaxEnemyTypeCount;
-		ReadInt32(sBuffer, "EnemyTypeCount", (int*)&iMaxEnemyTypeCount);
+		ReadInt16(sBuffer, "EnemyTypeCount", (short*)&iMaxEnemyTypeCount);
+
+		AllocEnemyDatas(iMaxEnemyTypeCount);
 
 		char* pCachedBuffer = strstr(sBuffer, "{");
 		if (pCachedBuffer != NULL) {
@@ -50,13 +52,10 @@ void LoadEnemyList(char* const sBuffer) {
 			char* pToken = strtok_s(pCachedBuffer, "}", &pContext);
 
 			char sEnemyDataInfoFilePath[MAX_PATH];
-			unsigned int iPoolCount = 0;
-			while (pToken != NULL) {
-				if (ReadString(pToken, "FilePath", sEnemyDataInfoFilePath, MAX_PATH) &&
-					ReadInt32(pToken, "PoolCount", (int*)&iPoolCount)) {
-					OpenFile(sEnemyDataInfoFilePath, nullptr);
 
-				}
+			while (pToken != NULL) {
+				if (ReadString(pToken, "FilePath", sEnemyDataInfoFilePath, MAX_PATH))
+					OpenFile(sEnemyDataInfoFilePath, LoadEnemyInformation);
 
 				pToken = strtok_s(NULL, "}", &pContext);
 			}
@@ -73,7 +72,7 @@ void InitializeGameManager() {
 }
 
 void ClearGameManager() {
-
+	DeallocEnemyDatas();
 
 	if (g_ListOfStageInformation)
 		free(g_ListOfStageInformation);
@@ -83,7 +82,9 @@ void ChangeScene(const ESceneType newSceneType) {
 	g_CurrentSceneType = newSceneType;
 }
 
+
 void GameLoop() {
+	static unsigned int g_iCurrentStageCnt = 0;
 	// 로직과 scene 함수 분리
 
 	switch (g_CurrentSceneType) {
