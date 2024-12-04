@@ -26,4 +26,6 @@ void Sprite_DrawString(const int iX, const int iY, const char* const strSprite, 
 void ChangeMainLoopRunState(const bool bNewState);
 bool GetMainLoopRunState();
 
+bool RenderSkip();
+
 #endif

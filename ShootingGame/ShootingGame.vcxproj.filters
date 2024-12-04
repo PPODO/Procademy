@@ -43,6 +43,12 @@
     <Filter Include="Header Files\Actor\Enemy">
       <UniqueIdentifier>{50f778b6-63a4-4f40-ac3e-3517f9a9fbc2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Actor\Bullet">
+      <UniqueIdentifier>{a36d1714-0fab-4364-bf78-0aae18df43d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\GameOver">
+      <UniqueIdentifier>{6c880ebd-f7ed-4c8c-b458-a1e4897a0bb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Console\Console.h">
@@ -68,6 +74,15 @@
     </ClInclude>
     <ClInclude Include="Actor\Enemy\Enemy.h">
       <Filter>Header Files\Actor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\Bullet.h">
+      <Filter>Header Files\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameOver\GameOver.h">
+      <Filter>Header Files\Game\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Clear\GameClear.h">
+      <Filter>Header Files\Game\Clear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +112,15 @@
     </ClCompile>
     <ClCompile Include="Actor\Enemy\Enemy.cpp">
       <Filter>Header Files\Actor\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\Bullet.cpp">
+      <Filter>Header Files\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameOver\GameOver.cpp">
+      <Filter>Header Files\Game\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Clear\GameClear.cpp">
+      <Filter>Header Files\Game\Clear</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

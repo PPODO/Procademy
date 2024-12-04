@@ -1,4 +1,6 @@
 Type:1
-HP:10
+HP:25
 XPosMoveSpeed:1
 Sprite:"<->"
+MovementDelayTime:100
+FireDelayTime:1500

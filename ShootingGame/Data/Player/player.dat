@@ -1,2 +1,4 @@
 HP:100
-XPosMoveSpeed:2
+XPosMoveSpeed:1
+Sprite:"<->"
+FireDelayTime:150

@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include "Console.h"
+#pragma comment(lib, "winmm.lib") 
 
 // global
 char szScreenBuffer[dfSCREEN_HEIGHT][dfSCREEN_WIDTH];
@@ -69,4 +70,20 @@ void ChangeMainLoopRunState(const bool bNewState) {
 
 bool GetMainLoopRunState() {
 	return g_bMainLoopRunState;
+}
+
+bool RenderSkip() {
+	static DWORD oldTime = timeGetTime();
+
+	int t = timeGetTime() - oldTime;
+	int sleepTick = 20 - t;
+	if (sleepTick > 0)
+		Sleep(sleepTick);
+
+	oldTime += 20;
+
+	if (sleepTick < 0)
+		return true;
+
+	return false;
 }

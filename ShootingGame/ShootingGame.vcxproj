@@ -91,6 +91,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,21 +129,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Actor\Bullet\Bullet.h" />
     <ClInclude Include="Actor\Enemy\Enemy.h" />
     <ClInclude Include="Actor\Player\Player.h" />
     <ClInclude Include="Console\Console.h" />
     <ClInclude Include="DataParse\DataParse.h" />
+    <ClInclude Include="Game\Clear\GameClear.h" />
     <ClInclude Include="Game\GameManager.h" />
+    <ClInclude Include="Game\GameOver\GameOver.h" />
     <ClInclude Include="Game\InGameStage\InGameStageScene.h" />
     <ClInclude Include="Game\Loading\Loading.h" />
     <ClInclude Include="Game\Title\TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actor\Bullet\Bullet.cpp" />
     <ClCompile Include="Actor\Enemy\Enemy.cpp" />
     <ClCompile Include="Actor\Player\Player.cpp" />
     <ClCompile Include="Console\Console.cpp" />
     <ClCompile Include="DataParse\DataParse.cpp" />
+    <ClCompile Include="Game\Clear\GameClear.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
+    <ClCompile Include="Game\GameOver\GameOver.cpp" />
     <ClCompile Include="Game\InGameStage\InGameStageScene.cpp" />
     <ClCompile Include="Game\Loading\Loading.cpp" />
     <ClCompile Include="Game\Title\TitleScene.cpp" />

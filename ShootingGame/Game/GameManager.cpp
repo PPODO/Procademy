@@ -2,8 +2,11 @@
 #include "Title/TitleScene.h"
 #include "Loading/Loading.h"
 #include "InGameStage/InGameStageScene.h"
+#include "GameOver/GameOver.h"
+#include "Clear/GameClear.h"
 #include "../Actor/Player/Player.h"
 #include "../Actor/Enemy/Enemy.h"
+#include "../Actor/Bullet/Bullet.h"
 #include "../DataParse/DataParse.h"
 #include "../Console/Console.h"
 #include <stdio.h>
@@ -60,6 +63,34 @@ void LoadEnemyList(char* const sBuffer) {
 				pToken = strtok_s(NULL, "}", &pContext);
 			}
 		}
+		else
+			ChangeMainLoopRunState(false); // error
+	}
+}
+
+void LoadBulletList(char* const sBuffer) {
+	if (sBuffer) {
+		unsigned short iMaxBulletTypeCount;
+		ReadInt16(sBuffer, "BulletTypeCount", (short*)&iMaxBulletTypeCount);
+
+		AllocBulletDatas(iMaxBulletTypeCount);
+
+		char* pCachedBuffer = strstr(sBuffer, "{");
+		if (pCachedBuffer != NULL) {
+			char* pContext = NULL;
+			char* pToken = strtok_s(pCachedBuffer, "}", &pContext);
+
+			char sEnemyDataInfoFilePath[MAX_PATH];
+
+			while (pToken != NULL) {
+				if (ReadString(pToken, "FilePath", sEnemyDataInfoFilePath, MAX_PATH))
+					OpenFile(sEnemyDataInfoFilePath, LoadBulletInformation);
+
+				pToken = strtok_s(NULL, "}", &pContext);
+			}
+		}
+		else
+			ChangeMainLoopRunState(false); // error
 	}
 }
 
@@ -68,40 +99,78 @@ void InitializeGameManager() {
 
 	OpenFile("Data//Player//player.dat", LoadPlayerInformation);
 	OpenFile("Data//Enemy//EnemyList.dat", LoadEnemyList);
+	OpenFile("Data//Bullet//BulletList.dat", LoadBulletList);
+
 	OpenFile("Data//Stage//StageList.dat", LoadStageList);
 }
 
 void ClearGameManager() {
+	DeallocBulletDatas();
 	DeallocEnemyDatas();
 
-	if (g_ListOfStageInformation)
-		free(g_ListOfStageInformation);
+	free(g_ListOfStageInformation);
 }
 
 void ChangeScene(const ESceneType newSceneType) {
 	g_CurrentSceneType = newSceneType;
 }
 
+unsigned int g_logicCnt = 0;
+unsigned int g_renderCnt = 0;
+
+void FPS() {
+	static DWORD tick = timeGetTime();
+
+	if (timeGetTime() - tick >= 1000) {
+		printf("Logic : %d, Render : %d\n", g_logicCnt, g_renderCnt);
+		g_logicCnt = 0;
+		g_renderCnt = 0;
+
+		tick += 1000;
+	}
+}
 
 void GameLoop() {
 	static unsigned int g_iCurrentStageCnt = 0;
-	// 로직과 scene 함수 분리
 
 	switch (g_CurrentSceneType) {
 	case ESceneType::E_TITLE:
+		g_iCurrentStageCnt = 0;
+
 		TitleInput();
-		TitleScene();
+
+		if (!RenderSkip())
+			TitleScene();
 		break;
 	case ESceneType::E_LOADING:
-		InitializeStage(g_ListOfStageInformation[g_iCurrentStageCnt++].m_sStageFilePath);
+		if (g_iCurrentStageCnt < g_iMaxStageCnt)
+			InitializeStage(g_ListOfStageInformation[g_iCurrentStageCnt++].m_sStageFilePath);
+		else
+			ChangeScene(ESceneType::E_CLEAR);
 		break;
 	case ESceneType::E_INSTAGE:
-		InGamePlayerInput();
+		InGameInput();
 		InGameStageLogic();
-		InGameStageScene();
+		g_logicCnt++;
+
+		//FPS();
+
+		if (!RenderSkip()) {
+			InGameStageScene();
+			g_renderCnt++;
+		}
 		break;
 	case ESceneType::E_CLEAR:
+		GameClearSceneInput();
 
+		if (!RenderSkip())
+			GameClearSceneRender();
+		break;
+	case ESceneType::E_GAMEOVER:
+		GameOverSceneInput();
+
+		if (!RenderSkip())
+			GameOverSceneRender();
 		break;
 	}
 }

@@ -7,7 +7,7 @@ struct FStageInformation {
 };
 
 // input
-void InGamePlayerInput();
+void InGameInput();
 
 // logic
 void InGameStageLogic();

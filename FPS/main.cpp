@@ -14,12 +14,10 @@ void Logic() {
 }
 
 void FPS() {
-	static int iFPSCnt = 0;
 	static DWORD tick = timeGetTime();
 
 	if (timeGetTime() - tick >= 1000) {
 		printf("Logic : %d, Render : %d\n", g_logicCnt, g_renderCnt);
-		iFPSCnt = 0;
 		g_logicCnt = 0;
 		g_renderCnt = 0;
 
@@ -43,10 +41,10 @@ bool Skip() {
 
 	oldTime += 20;
 
-	if (sleepTick < 0) {
-		return true;
-	}
-	return false;
+	if (sleepTick < 0)
+		return false;
+
+	return true;
 }
 
 int main() {

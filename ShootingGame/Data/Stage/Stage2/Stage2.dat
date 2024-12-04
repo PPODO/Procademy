@@ -1,10 +1,15 @@
 {
-Type:0
+ActorType:0
 X:40
 Y:12
 },
 {
-Type:1
+ActorType:1
 X:10
+Y:2
+},
+{
+ActorType:2
+X:16
 Y:2
 }

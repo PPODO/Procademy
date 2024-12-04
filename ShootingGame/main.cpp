@@ -5,20 +5,17 @@
 #include "Game/GameManager.h"
 
 int main(void) {
+	timeBeginPeriod(1);
+
 	cs_Initial();
 
 	InitializeGameManager();
 
-	while (GetMainLoopRunState()) {
-		Buffer_Clear();
-
+	while (GetMainLoopRunState())
 		GameLoop();
 
-		Buffer_Flip();
-
-		Sleep(50);
-	}
-
 	ClearGameManager();
+
+	timeEndPeriod(1);
 	return 0;
 }

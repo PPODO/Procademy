@@ -1,0 +1,6 @@
+Type:2
+HP:35
+XPosMoveSpeed:2
+Sprite:"*-*"
+MovementDelayTime:60
+FireDelayTime:1000

@@ -10,8 +10,6 @@ void OpenFile(const char* const sFilePath, void (*Process)(char* const)) {
 		const long dataSize = ftell(file);
 		char* sBuffer = (char*)malloc((dataSize * sizeof(char)) + 1);
 
-		memset(sBuffer, 0, dataSize);
-
 		if (sBuffer) {
 			fseek(file, 0, SEEK_SET);
 			if (fread(sBuffer, dataSize, 1, file) > 0)
@@ -55,6 +53,18 @@ bool ReadInt16(char* const sBufferData, const char* const sSubString, short* pOu
 	char* pValueData = NULL;
 	if (FindValueByKey(sBufferData, sSubString, &pValueData)) {
 		*pOutData = (short)atoi(pValueData);
+		return true;
+	}
+	return false;
+}
+
+bool ReadInt8(char* const sBufferData, const char* const sSubString, char* pOutData) {
+	if (!sBufferData || !sSubString || !pOutData)
+		return false;
+
+	char* pValueData = NULL;
+	if (FindValueByKey(sBufferData, sSubString, &pValueData)) {
+		*pOutData = *pValueData;
 		return true;
 	}
 	return false;

@@ -1,4 +1,7 @@
-EnemyTypeCount:1
+EnemyTypeCount:2
 {
 FilePath:"Data//Enemy//Enemy1.dat"
+}
+{
+FilePath:"Data//Enemy//Enemy2.dat"
 }
