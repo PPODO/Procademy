@@ -159,20 +159,20 @@ void EnemyLogic() {
 
 bool EnemyCollisionLogic(const unsigned short iX, const unsigned short iY, const unsigned short iDamage) {
 	for (unsigned int i = 0; i < g_iUsedEnemyPoolCnt; i++) {
-		if (g_EnemyActorPoolList[i].m_bIsVisible) {
-			if (g_EnemyActorPoolList[i].m_iX - (g_EnemyActorPoolList[i].m_iSpriteWidth / 2) <= iX && 
-				g_EnemyActorPoolList[i].m_iX + (g_EnemyActorPoolList[i].m_iSpriteWidth / 2)  >= iX && 
-				g_EnemyActorPoolList[i].m_iY == iY) {
-				short iCachedNewHP = g_EnemyActorPoolList[i].m_iHP -= iDamage;
-				if (iCachedNewHP <= 0) {
-					g_EnemyActorPoolList[i].m_bIsVisible = false;
-					g_iAliveEnemyCnt--;
-				}
-				else
-					g_EnemyActorPoolList[i].m_iHP = iCachedNewHP;
+		if (!g_EnemyActorPoolList[i].m_bIsVisible)
+			continue;
 
-				return true;
+		const short iEnemyLeft = g_EnemyActorPoolList[i].m_iX - g_EnemyActorPoolList[i].m_iSpriteWidth / 2;
+		const short iEnemyRight = g_EnemyActorPoolList[i].m_iX + g_EnemyActorPoolList[i].m_iSpriteWidth / 2;
+
+		if (iEnemyLeft <= iX && iEnemyRight >= iX && g_EnemyActorPoolList[i].m_iY == iY) {
+			g_EnemyActorPoolList[i].m_iHP -= iDamage;
+
+			if (g_EnemyActorPoolList[i].m_iHP <= 0) {
+				g_EnemyActorPoolList[i].m_bIsVisible = false;
+				g_iAliveEnemyCnt--;
 			}
+			return true;
 		}
 	}
 	return false;

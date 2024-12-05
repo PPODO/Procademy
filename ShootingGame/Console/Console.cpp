@@ -82,8 +82,5 @@ bool RenderSkip() {
 
 	oldTime += 20;
 
-	if (sleepTick < 0)
-		return true;
-
-	return false;
+	return t >= 20;
 }

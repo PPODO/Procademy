@@ -7,7 +7,7 @@
 #include "../../Console/Console.h"
 #include "../../DataParse/DataParse.h"
 
-#define dfBULLET_MAX_COUNT 100
+#define dfBULLET_MAX_COUNT 25
 
 static FBullet** g_pBulletActorPoolList = NULL;
 
@@ -123,16 +123,20 @@ _inline void BulletCollisionLogic(const unsigned short iBulletType, const unsign
 
 void BulletLogic() {
 	for (unsigned short i = 0; i < g_iMaxBulletTypeCount; i++) {
-		for (unsigned short j = 0; j < dfBULLET_MAX_COUNT; j++) {
-			if (g_pBulletActorPoolList[i] && g_pBulletActorPoolList[i][j].m_bIsVisible) {
-				if ((g_pBulletActorPoolList[i][j].m_iY < 0 || g_pBulletActorPoolList[i][j].m_iY > dfSCREEN_HEIGHT) ||
-					(g_pBulletActorPoolList[i][j].m_iX < 0 || g_pBulletActorPoolList[i][j].m_iX > dfSCREEN_WIDTH)) {
-					g_pBulletActorPoolList[i][j].m_bIsVisible = false;
-					continue;
-				}
+		FBullet* const pBulletPool = g_pBulletActorPoolList[i];
 
-				BulletCollisionLogic(i, j);
-				BulletMovementLogic(i, j);
+		for (unsigned short j = 0; j < dfBULLET_MAX_COUNT; j++) {
+			FBullet* const pBullet = &pBulletPool[j]; 
+
+			if (pBullet->m_bIsVisible) {
+				if (pBullet->m_iY < 0 || pBullet->m_iY > dfSCREEN_HEIGHT ||
+					pBullet->m_iX < 0 || pBullet->m_iX > dfSCREEN_WIDTH) {
+					pBullet->m_bIsVisible = false;
+				}
+				else {
+					BulletCollisionLogic(i, j);
+					BulletMovementLogic(i, j);
+				}
 			}
 		}
 	}

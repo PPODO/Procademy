@@ -25,7 +25,7 @@ void InGameInput() {
 
 void InGameStageLogic() {
 	if (!IsEnemiesAlive())
-		ChangeScene(ESceneType::E_LOADING);
+		ChangeScene(ESceneType::E_STAGECLEAR);
 
 	BulletLogic();
 

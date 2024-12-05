@@ -2,8 +2,9 @@
 #include "Title/TitleScene.h"
 #include "Loading/Loading.h"
 #include "InGameStage/InGameStageScene.h"
+#include "StageClear/StageClear.h"
 #include "GameOver/GameOver.h"
-#include "Clear/GameClear.h"
+#include "GameClear/GameClear.h"
 #include "../Actor/Player/Player.h"
 #include "../Actor/Enemy/Enemy.h"
 #include "../Actor/Bullet/Bullet.h"
@@ -143,24 +144,31 @@ void GameLoop() {
 			TitleScene();
 		break;
 	case ESceneType::E_LOADING:
-		if (g_iCurrentStageCnt < g_iMaxStageCnt)
-			InitializeStage(g_ListOfStageInformation[g_iCurrentStageCnt++].m_sStageFilePath);
-		else
-			ChangeScene(ESceneType::E_CLEAR);
+		InitializeStage(g_ListOfStageInformation[g_iCurrentStageCnt++].m_sStageFilePath);
 		break;
 	case ESceneType::E_INSTAGE:
 		InGameInput();
 		InGameStageLogic();
 		g_logicCnt++;
 
-		//FPS();
+		FPS();
 
 		if (!RenderSkip()) {
 			InGameStageScene();
 			g_renderCnt++;
 		}
 		break;
-	case ESceneType::E_CLEAR:
+	case ESceneType::E_STAGECLEAR:
+		if (g_iCurrentStageCnt >= g_iMaxStageCnt)
+			ChangeScene(ESceneType::E_GAMECLEAR);
+		else {
+			StageClearLogic(timeGetTime());
+
+			if (!RenderSkip())
+				StageClearSceneRender();
+		}
+		break;
+	case ESceneType::E_GAMECLEAR:
 		GameClearSceneInput();
 
 		if (!RenderSkip())

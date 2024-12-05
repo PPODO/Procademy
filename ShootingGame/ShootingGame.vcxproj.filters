@@ -28,9 +28,6 @@
     <Filter Include="Header Files\Game\Title">
       <UniqueIdentifier>{a234b482-5d40-4890-a43b-bc506dd9c0c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Game\Clear">
-      <UniqueIdentifier>{38d0c04c-f2d8-43df-b833-3b6bc13770da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Game\InGameStage">
       <UniqueIdentifier>{445bc1f6-d479-4c82-8744-a9c96d26ce5d}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,12 @@
     </Filter>
     <Filter Include="Header Files\Game\GameOver">
       <UniqueIdentifier>{6c880ebd-f7ed-4c8c-b458-a1e4897a0bb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\GameClear">
+      <UniqueIdentifier>{38d0c04c-f2d8-43df-b833-3b6bc13770da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\StageClear">
+      <UniqueIdentifier>{36421532-9796-4e18-b609-bc2d7ca1468d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,8 +84,11 @@
     <ClInclude Include="Game\GameOver\GameOver.h">
       <Filter>Header Files\Game\GameOver</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Clear\GameClear.h">
-      <Filter>Header Files\Game\Clear</Filter>
+    <ClInclude Include="Game\GameClear\GameClear.h">
+      <Filter>Header Files\Game\GameClear</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\StageClear\StageClear.h">
+      <Filter>Header Files\Game\StageClear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -119,8 +125,11 @@
     <ClCompile Include="Game\GameOver\GameOver.cpp">
       <Filter>Header Files\Game\GameOver</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Clear\GameClear.cpp">
-      <Filter>Header Files\Game\Clear</Filter>
+    <ClCompile Include="Game\GameClear\GameClear.cpp">
+      <Filter>Header Files\Game\GameClear</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\StageClear\StageClear.cpp">
+      <Filter>Header Files\Game\StageClear</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
