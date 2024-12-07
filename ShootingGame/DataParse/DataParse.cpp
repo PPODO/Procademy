@@ -9,6 +9,7 @@ void OpenFile(const char* const sFilePath, void (*Process)(char* const)) {
 		fseek(file, 0, SEEK_END);
 		const long dataSize = ftell(file);
 		char* sBuffer = (char*)malloc((dataSize * sizeof(char)) + 1);
+		memset(sBuffer, 0, (dataSize * sizeof(char)) + 1);
 
 		if (sBuffer) {
 			fseek(file, 0, SEEK_SET);

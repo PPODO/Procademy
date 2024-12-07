@@ -1,3 +1,2 @@
-StageCount:2
-{FilePath:"Data//Stage//Stage1//Stage1.dat"}
-{FilePath:"Data//Stage//Stage2//Stage2.dat"}
+StageCount:1
+{FilePath:"Data//Stage//Stage3//Stage3.dat"}

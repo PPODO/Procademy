@@ -1,6 +1,7 @@
 Type:1
+BulletType:0
 HP:25
 XPosMoveSpeed:1
-Sprite:"<->"
+Sprite:">-<"
 MovementDelayTime:100
-FireDelayTime:1500
+FireDelayTime:500

@@ -1,0 +1,6 @@
+Type:1
+XPosMoveSpeed:0
+YPosMoveSpeed:1
+Damage:25
+MovementDelayTime:75
+Sprite:*

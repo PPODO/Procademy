@@ -19,6 +19,22 @@ static ESceneType g_CurrentSceneType;
 static FStageInformation* g_ListOfStageInformation = NULL;
 static unsigned int g_iMaxStageCnt;
 
+// test
+/* 
+unsigned int g_logicCnt = 0;
+unsigned int g_renderCnt = 0;
+
+void FPS() {
+	static DWORD tick = timeGetTime();
+
+	if (timeGetTime() - tick >= 1000) {
+		printf("Logic : %d, Render : %d\n", g_logicCnt, g_renderCnt);
+		g_logicCnt = 0;
+		g_renderCnt = 0;
+
+		tick += 1000;
+	}
+}*/
 
 void LoadStageList(char* const sBuffer) {
 	if (sBuffer) {
@@ -81,11 +97,11 @@ void LoadBulletList(char* const sBuffer) {
 			char* pContext = NULL;
 			char* pToken = strtok_s(pCachedBuffer, "}", &pContext);
 
-			char sEnemyDataInfoFilePath[MAX_PATH];
+			char sBulletDataInfoFilePath[MAX_PATH];
 
 			while (pToken != NULL) {
-				if (ReadString(pToken, "FilePath", sEnemyDataInfoFilePath, MAX_PATH))
-					OpenFile(sEnemyDataInfoFilePath, LoadBulletInformation);
+				if (ReadString(pToken, "FilePath", sBulletDataInfoFilePath, MAX_PATH))
+					OpenFile(sBulletDataInfoFilePath, LoadBulletInformation);
 
 				pToken = strtok_s(NULL, "}", &pContext);
 			}
@@ -116,21 +132,6 @@ void ChangeScene(const ESceneType newSceneType) {
 	g_CurrentSceneType = newSceneType;
 }
 
-unsigned int g_logicCnt = 0;
-unsigned int g_renderCnt = 0;
-
-void FPS() {
-	static DWORD tick = timeGetTime();
-
-	if (timeGetTime() - tick >= 1000) {
-		printf("Logic : %d, Render : %d\n", g_logicCnt, g_renderCnt);
-		g_logicCnt = 0;
-		g_renderCnt = 0;
-
-		tick += 1000;
-	}
-}
-
 void GameLoop() {
 	static unsigned int g_iCurrentStageCnt = 0;
 
@@ -149,14 +150,9 @@ void GameLoop() {
 	case ESceneType::E_INSTAGE:
 		InGameInput();
 		InGameStageLogic();
-		g_logicCnt++;
 
-		FPS();
-
-		if (!RenderSkip()) {
+		if (!RenderSkip())
 			InGameStageScene();
-			g_renderCnt++;
-		}
 		break;
 	case ESceneType::E_STAGECLEAR:
 		if (g_iCurrentStageCnt >= g_iMaxStageCnt)

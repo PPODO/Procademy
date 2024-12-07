@@ -12,6 +12,8 @@ struct FEnemy {
 
 	unsigned short m_iXPosMoveSpeed;
 
+	unsigned short m_iBulletType;
+
 	unsigned short m_iMoveToX;
 	unsigned short m_iMoveToY;
 

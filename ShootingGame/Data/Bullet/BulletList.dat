@@ -1,4 +1,7 @@
-BulletTypeCount:1
+BulletTypeCount:2
 {
 FilePath:"Data//Bullet//BulletType1.dat"
+}
+{
+FilePath:"Data//Bullet//BulletType2.dat"
 }

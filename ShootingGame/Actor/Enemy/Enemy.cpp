@@ -38,14 +38,18 @@ void LoadEnemyInformation(char* const sBuffer) {
 		if (iLoadedCnt >= g_iMaxEnemyTypeCount)
 			return;
 
-		ReadInt16(sBuffer, "Type", (short*)&g_pEnemyDatas[iLoadedCnt].m_iType);
-		ReadInt16(sBuffer, "HP", (short*)&g_pEnemyDatas[iLoadedCnt].m_iHP);
-		ReadInt16(sBuffer, "XPosMoveSpeed", (short*)&g_pEnemyDatas[iLoadedCnt].m_iXPosMoveSpeed);
+		FEnemy* pCachedEnemyData = &g_pEnemyDatas[iLoadedCnt];
 
-		ReadInt32(sBuffer, "MovementDelayTime", (int*)&g_pEnemyDatas[iLoadedCnt].m_iMovementDelayTime);
-		ReadInt32(sBuffer, "FireDelayTime", (int*)&g_pEnemyDatas[iLoadedCnt].m_iFireDelayTime);
+		ReadInt16(sBuffer, "Type", (short*)&pCachedEnemyData->m_iType);
+		ReadInt16(sBuffer, "HP", (short*)&pCachedEnemyData->m_iHP);
+		ReadInt16(sBuffer, "XPosMoveSpeed", (short*)&pCachedEnemyData->m_iXPosMoveSpeed);
 
-		ReadString(sBuffer, "Sprite", g_pEnemyDatas[iLoadedCnt].m_sSprite, ENEMY_SPRITE_WIDTH);
+		ReadInt16(sBuffer, "BulletType", (short*)&pCachedEnemyData->m_iBulletType);
+
+		ReadInt32(sBuffer, "MovementDelayTime", (int*)&pCachedEnemyData->m_iMovementDelayTime);
+		ReadInt32(sBuffer, "FireDelayTime", (int*)&pCachedEnemyData->m_iFireDelayTime);
+
+		ReadString(sBuffer, "Sprite", pCachedEnemyData->m_sSprite, ENEMY_SPRITE_WIDTH);
 
 		iLoadedCnt++;
 	}
@@ -61,25 +65,29 @@ void AllocEnemyToPool(const unsigned short iActorType, const unsigned short iX, 
 	if (g_pEnemyDatas) {
 		for (unsigned short i = 0; i < g_iMaxEnemyTypeCount; i++) {
 			if (g_pEnemyDatas[i].m_iType == iActorType) {
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iX = iX;
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iY = iY;
+				FEnemy* pCachedNewEnemyData = &g_EnemyActorPoolList[g_iUsedEnemyPoolCnt];
 
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iHP = g_pEnemyDatas[i].m_iHP;
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iType = g_pEnemyDatas[i].m_iType;
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iXPosMoveSpeed = g_pEnemyDatas[i].m_iXPosMoveSpeed;
+				pCachedNewEnemyData->m_iX = iX;
+				pCachedNewEnemyData->m_iY = iY;
 
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iLastMovementTime = 0;
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iLastFireTime = 0;
+				pCachedNewEnemyData->m_iHP = g_pEnemyDatas[i].m_iHP;
+				pCachedNewEnemyData->m_iType = g_pEnemyDatas[i].m_iType;
+				pCachedNewEnemyData->m_iXPosMoveSpeed = g_pEnemyDatas[i].m_iXPosMoveSpeed;
 
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iMovementDelayTime = g_pEnemyDatas[i].m_iMovementDelayTime;
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iFireDelayTime= g_pEnemyDatas[i].m_iFireDelayTime;
+				pCachedNewEnemyData->m_iLastMovementTime = 0;
+				pCachedNewEnemyData->m_iLastFireTime = 0;
 
-				SetTargetLocation(&g_EnemyActorPoolList[g_iUsedEnemyPoolCnt]);
+				pCachedNewEnemyData->m_iBulletType = g_pEnemyDatas[i].m_iBulletType;
 
-				memcpy(g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_sSprite, g_pEnemyDatas[i].m_sSprite, ENEMY_SPRITE_WIDTH);
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_iSpriteWidth = (unsigned short)strlen(g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_sSprite);
+				pCachedNewEnemyData->m_iMovementDelayTime = g_pEnemyDatas[i].m_iMovementDelayTime;
+				pCachedNewEnemyData->m_iFireDelayTime= g_pEnemyDatas[i].m_iFireDelayTime;
 
-				g_EnemyActorPoolList[g_iUsedEnemyPoolCnt].m_bIsVisible = true;
+				SetTargetLocation(pCachedNewEnemyData);
+
+				memcpy(pCachedNewEnemyData->m_sSprite, g_pEnemyDatas[i].m_sSprite, ENEMY_SPRITE_WIDTH);
+				pCachedNewEnemyData->m_iSpriteWidth = (unsigned short)strlen(pCachedNewEnemyData->m_sSprite);
+
+				pCachedNewEnemyData->m_bIsVisible = true;
 
 				g_iUsedEnemyPoolCnt++;
 				g_iAliveEnemyCnt++;
@@ -139,9 +147,9 @@ _inline void EnemyMovementLogic(const DWORD iCurrentTime, const int iIndex) {
 	}
 }
 
-_inline void EnemyFireLogic(const DWORD iCurrentTime, const int iIndex) {
+_inline void EnemyFireLogic(const DWORD iCurrentTime, const int iIndex, const unsigned short iBulletType) {
 	if (iCurrentTime - g_EnemyActorPoolList[iIndex].m_iLastFireTime >= g_EnemyActorPoolList[iIndex].m_iFireDelayTime) {
-		Fire(0, g_EnemyActorPoolList[iIndex].m_iX, g_EnemyActorPoolList[iIndex].m_iY + 1, false);
+		Fire(iBulletType, g_EnemyActorPoolList[iIndex].m_iX, g_EnemyActorPoolList[iIndex].m_iY + 1, false);
 		g_EnemyActorPoolList[iIndex].m_iLastFireTime = iCurrentTime;
 	}
 }
@@ -152,7 +160,7 @@ void EnemyLogic() {
 	for (unsigned int i = 0; i < g_iUsedEnemyPoolCnt; i++) {
 		if (g_EnemyActorPoolList[i].m_bIsVisible) {
 			EnemyMovementLogic(iCurrentTime, i);
-			EnemyFireLogic(iCurrentTime, i);
+			EnemyFireLogic(iCurrentTime, i, g_EnemyActorPoolList[i].m_iBulletType);
 		}
 	}
 }
