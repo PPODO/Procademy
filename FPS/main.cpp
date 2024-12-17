@@ -48,20 +48,11 @@ bool Skip() {
 }
 
 int main() {
-	srand(time(NULL));
+	char* p = new char[10];
 
-	timeBeginPeriod(1);
+	delete p;
 
-	while (true) {
-		Logic();
+ 	*p = 10;
 
-		FPS();
-
-		if (!Skip()) {
-			Render();
-		}
-	}
-
-	timeEndPeriod(1);
 	return 0;
 }
