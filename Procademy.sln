@@ -65,6 +65,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FPS", "FPS\FPS.vcxproj", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Polymorphism", "Polymorphism\Polymorphism.vcxproj", "{294D04E5-3530-406B-89B1-93BA7812A063}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "virtual-table", "virtual-table\virtual-table.vcxproj", "{1931E1E5-D77D-49D5-A0C0-1EA32465B625}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -321,6 +323,14 @@ Global
 		{294D04E5-3530-406B-89B1-93BA7812A063}.Release|x64.Build.0 = Release|x64
 		{294D04E5-3530-406B-89B1-93BA7812A063}.Release|x86.ActiveCfg = Release|Win32
 		{294D04E5-3530-406B-89B1-93BA7812A063}.Release|x86.Build.0 = Release|Win32
+		{1931E1E5-D77D-49D5-A0C0-1EA32465B625}.Debug|x64.ActiveCfg = Debug|x64
+		{1931E1E5-D77D-49D5-A0C0-1EA32465B625}.Debug|x64.Build.0 = Debug|x64
+		{1931E1E5-D77D-49D5-A0C0-1EA32465B625}.Debug|x86.ActiveCfg = Debug|Win32
+		{1931E1E5-D77D-49D5-A0C0-1EA32465B625}.Debug|x86.Build.0 = Debug|Win32
+		{1931E1E5-D77D-49D5-A0C0-1EA32465B625}.Release|x64.ActiveCfg = Release|x64
+		{1931E1E5-D77D-49D5-A0C0-1EA32465B625}.Release|x64.Build.0 = Release|x64
+		{1931E1E5-D77D-49D5-A0C0-1EA32465B625}.Release|x86.ActiveCfg = Release|Win32
+		{1931E1E5-D77D-49D5-A0C0-1EA32465B625}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
